@@ -3,299 +3,200 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>R. G. Brajesh, PhD — Computational Biologist</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<title>R. G. Brajesh, PhD — Assistant Professor</title>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-/* ——— TOKENS ——— */
+/* ============ TOKENS ============
+   paper:    #F7F4EA  warm ivory, page ground
+   paper-2:  #EFE9D6  card / panel ground
+   ink:      #20241D  primary text (near-black, faint olive cast)
+   ink-70:   #454A3D  body copy
+   muted:    #6E7361  secondary text
+   rule:     #DBD4BB  hairline
+   rule-2:   #C5BB94  stronger hairline / underline
+   green:    #33503C  primary accent — biology
+   green-d:  #233628  deepest accent text
+   gold:     #8C6A2E  secondary accent — academic / honours
+*/
 :root{
-  --bg:#080B18;
-  --surface:#0F1325;
-  --surface-2:#151929;
-  --surface-3:#1C2038;
-  --border:#22274A;
-  --border-hi:#343C6C;
-  --text:#D8DCEF;
-  --muted:#7880A6;
-  --dim:#40476C;
-  --purple:#8B7EFF;
-  --purple-light:#B3AAFF;
-  --purple-dark:#6356E8;
-  --cyan:#12D9CF;
-  --cyan-light:#58EAE3;
-  --amber:#FFB84D;
-  --rose:#FF7096;
-  --grad:linear-gradient(130deg,#8B7EFF,#12D9CF);
+  --paper:#F7F4EA; --paper-2:#EFE9D6; --paper-3:#E7DFC4;
+  --ink:#20241D; --ink-70:#454A3D; --muted:#6E7361;
+  --rule:#DBD4BB; --rule-2:#C5BB94;
+  --green:#33503C; --green-d:#233628;
+  --gold:#8C6A2E; --gold-d:#6E5320;
 }
-
-/* ——— RESET ——— */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-size:16px;line-height:1.65;overflow-x:hidden}
-a{text-decoration:none}
-em{font-style:italic}
+body{background:var(--paper);color:var(--ink-70);font-family:'Inter',sans-serif;font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
 
-/* ——— NAV ——— */
+/* ============ TYPE HELPERS ============ */
+.kicker{font:600 12px/1 'Inter';letter-spacing:.16em;text-transform:uppercase;color:var(--gold-d)}
+.serif{font-family:'Newsreader',serif}
+.sec-title{font-family:'Newsreader',serif;font-weight:600;font-size:clamp(28px,3.6vw,40px);color:var(--ink);letter-spacing:-.01em;margin:10px 0 0}
+.rule-short{border:none;height:1px;width:56px;background:var(--rule-2);margin:18px 0 0}
+
+/* ============ NAV ============ */
 #nav{
   position:fixed;top:0;left:0;right:0;z-index:200;
-  padding:18px 64px;
   display:flex;align-items:center;justify-content:space-between;
-  transition:background .3s,box-shadow .3s;
+  padding:20px 56px;border-bottom:1px solid var(--rule);
+  background:rgba(247,244,234,.86);backdrop-filter:blur(6px);
+  transition:box-shadow .25s, background .25s;
 }
-#nav.solid{
-  background:rgba(8,11,24,.92);
-  backdrop-filter:blur(14px);
-  box-shadow:0 1px 0 var(--border);
-}
-.nav-logo{
-  font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:17px;
-  background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  letter-spacing:-.01em;
-}
-.nav-links{display:flex;gap:34px;list-style:none}
-.nav-links a{color:var(--muted);font-size:14px;font-weight:500;letter-spacing:.02em;transition:color .2s}
-.nav-links a:hover{color:var(--text)}
+#nav.solid{background:rgba(247,244,234,.97);box-shadow:0 1px 0 var(--rule-2)}
+.nav-name{font-family:'Newsreader',serif;font-style:italic;font-weight:500;font-size:17px;color:var(--ink)}
+.nav-links{display:flex;gap:30px;list-style:none}
+.nav-links a{font-size:13.5px;color:var(--ink-70);font-weight:500;padding-bottom:3px;border-bottom:1px solid transparent;transition:border-color .2s,color .2s}
+.nav-links a:hover{color:var(--green-d);border-color:var(--gold)}
 
-/* ——— HERO ——— */
-#hero{
-  position:relative;min-height:100vh;
-  display:flex;align-items:center;justify-content:center;
-  overflow:hidden;
-}
-#canvas{position:absolute;inset:0;width:100%;height:100%}
-.hero-veil{
-  position:absolute;inset:0;
-  background:linear-gradient(180deg,rgba(8,11,24,.15) 0%,rgba(8,11,24,.72) 55%,#080B18 100%);
-  pointer-events:none;
-}
-.hero-inner{
-  position:relative;z-index:2;
-  text-align:center;max-width:860px;padding:0 24px;
-}
-.hero-pill{
-  display:inline-flex;align-items:center;gap:9px;
-  padding:6px 18px;border:1px solid var(--border-hi);border-radius:100px;
-  font-size:12.5px;color:var(--cyan);font-family:'Fira Code',monospace;
-  background:rgba(18,217,207,.06);margin-bottom:28px;
-}
-.hero-pill::before{
-  content:'';width:6px;height:6px;border-radius:50%;background:var(--cyan);
-  animation:blink 2.2s ease-in-out infinite;
-}
-@keyframes blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.65)}}
+/* ============ HERO ============ */
+#hero{position:relative;padding:172px 24px 96px;text-align:center;overflow:hidden}
+#contour{position:absolute;left:0;right:0;top:60px;width:100%;height:auto;pointer-events:none;z-index:0}
+.hero-inner{position:relative;z-index:1;max-width:760px;margin:0 auto}
 
-.hero-name{
-  font-family:'Space Grotesk',sans-serif;
-  font-size:clamp(50px,9vw,92px);font-weight:700;
-  letter-spacing:-.035em;line-height:1;
-  color:#fff;margin-bottom:14px;
-}
-.hero-name span{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hero-sub{font-size:17px;color:var(--muted);margin-bottom:44px;font-weight:400;letter-spacing:.01em}
+.hero-eyebrow{font:600 12px/1 'Inter';letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:22px}
+.hero-name{font-family:'Newsreader',serif;font-weight:600;font-size:clamp(40px,6.4vw,64px);color:var(--ink);letter-spacing:-.02em;line-height:1.05}
+.hero-title{font-family:'Newsreader',serif;font-style:italic;font-weight:400;font-size:19px;color:var(--green-d);margin-top:16px}
+.hero-org{font-size:14.5px;color:var(--muted);margin-top:6px}
 
-.hero-stats{
-  display:flex;align-items:center;justify-content:center;gap:48px;margin-bottom:48px;
-}
-.hs-num{
-  font-family:'Space Grotesk',sans-serif;font-size:38px;font-weight:700;
-  background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  line-height:1;margin-bottom:5px;
-}
-.hs-lbl{font-size:11px;color:var(--dim);letter-spacing:.1em;text-transform:uppercase;font-weight:500}
-.hs-div{width:1px;height:44px;background:var(--border)}
+.hero-contact{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:22px;font-size:13.5px;color:var(--muted)}
+.hero-contact a{border-bottom:1px solid var(--rule-2);transition:color .2s,border-color .2s}
+.hero-contact a:hover{color:var(--green-d);border-color:var(--green)}
+.hero-dot{width:3px;height:3px;border-radius:50%;background:var(--rule-2)}
 
-.btn-primary{
-  display:inline-flex;align-items:center;gap:10px;
-  padding:13px 32px;background:linear-gradient(135deg,var(--purple-dark),#4840CC);
-  color:#fff;border-radius:8px;font-size:15px;font-weight:600;
-  box-shadow:0 0 32px rgba(139,126,255,.28);transition:transform .2s,box-shadow .2s;
-}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 6px 40px rgba(139,126,255,.42)}
+.hero-statement{margin-top:34px;font-size:17px;line-height:1.85;color:var(--ink-70);max-width:600px;margin-left:auto;margin-right:auto}
 
-/* ——— CONTENT WRAPPER ——— */
-.cw{max-width:1180px;margin:0 auto;padding:96px 60px}
+.hero-facts{display:flex;align-items:flex-start;justify-content:center;gap:0;margin-top:46px}
+.hf{padding:0 28px;text-align:center}
+.hf-num{font-family:'Newsreader',serif;font-weight:600;font-size:27px;color:var(--ink)}
+.hf-lbl{font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin-top:5px}
+.hf-div{width:1px;background:var(--rule-2);align-self:stretch}
 
-/* ——— SHARED SECTION LABELS ——— */
-.eyebrow{display:block;font-family:'Fira Code',monospace;font-size:12px;
-  color:var(--cyan);letter-spacing:.14em;text-transform:uppercase;margin-bottom:12px}
-.section-title{
-  font-family:'Space Grotesk',sans-serif;
-  font-size:clamp(30px,4.5vw,50px);font-weight:700;
-  letter-spacing:-.025em;line-height:1.08;color:#fff;margin-bottom:14px;
-}
-.section-lead{font-size:17px;color:var(--muted);max-width:580px;line-height:1.75}
+.hero-cta{display:flex;gap:36px;justify-content:center;margin-top:46px}
+.cta-link{font-size:14px;font-weight:600;color:var(--green-d);border-bottom:1.5px solid var(--gold);padding-bottom:4px;transition:opacity .2s}
+.cta-link:hover{opacity:.62}
 
-/* ——— ABOUT ——— */
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;margin-top:60px;align-items:start}
-.about-body p{color:var(--muted);line-height:1.85;margin-bottom:20px;font-size:16px}
-.tag-row{display:flex;flex-wrap:wrap;gap:9px;margin-top:26px}
-.tag{padding:6px 15px;border-radius:100px;font-size:12.5px;font-weight:500;border:1px solid;letter-spacing:.01em}
-.tp{border-color:rgba(139,126,255,.28);color:var(--purple-light);background:rgba(139,126,255,.07)}
-.tc{border-color:rgba(18,217,207,.25);color:var(--cyan-light);background:rgba(18,217,207,.06)}
-.ta{border-color:rgba(255,184,77,.25);color:var(--amber);background:rgba(255,184,77,.06)}
+/* ============ SECTIONS ============ */
+.section{max-width:920px;margin:0 auto;padding:88px 28px}
+.section.alt{background:var(--paper-2);max-width:none}
+.section.alt > .inner{max-width:920px;margin:0 auto;padding:88px 28px}
+.sec-lead{font-size:15.5px;color:var(--muted);max-width:560px;margin-top:14px;line-height:1.75}
 
-.about-cards{display:flex;flex-direction:column;gap:14px}
-.ac{
-  background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:22px 24px;
-  transition:border-color .25s,transform .25s;
-}
-.ac:hover{border-color:var(--border-hi);transform:translateX(5px)}
-.ac-icon{font-size:22px;margin-bottom:9px}
-.ac-title{font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:#fff;margin-bottom:5px}
-.ac-text{font-size:13px;color:var(--muted);line-height:1.6}
+/* ============ ABOUT ============ */
+.about-cols{display:grid;grid-template-columns:1.15fr 1fr;gap:56px;margin-top:42px;align-items:start}
+.about-cols p{margin-bottom:18px;font-size:15.5px;color:var(--ink-70)}
+.tag-line{margin-top:24px;font-size:13.5px;color:var(--muted);line-height:1.9}
+.tag-line b{color:var(--green-d);font-weight:600}
 
-/* ——— TIMELINE ——— */
-.timeline{position:relative;margin-top:60px}
-.timeline::before{
-  content:'';position:absolute;left:19px;top:10px;bottom:10px;width:1px;
-  background:linear-gradient(to bottom,var(--purple),var(--cyan),rgba(18,217,207,0));
-}
-.ti{position:relative;padding-left:54px;margin-bottom:44px}
-.ti-dot{
-  position:absolute;left:11px;top:10px;
-  width:17px;height:17px;border-radius:50%;
-  border:2px solid var(--border-hi);background:var(--bg);
-  display:flex;align-items:center;justify-content:center;
-}
-.ti-dot-core{width:7px;height:7px;border-radius:50%}
-.dot-cyan .ti-dot-core{background:var(--cyan)}
-.dot-amber .ti-dot-core{background:var(--amber)}
-.dot-purple .ti-dot-core{background:var(--purple)}
+.hi-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.hi{border:1px solid var(--rule);background:var(--paper-2);padding:20px 22px;transition:border-color .2s}
+.hi:hover{border-color:var(--rule-2)}
+.hi-t{font-family:'Newsreader',serif;font-weight:600;font-size:15px;color:var(--ink);margin-bottom:7px}
+.hi-d{font-size:13px;color:var(--muted);line-height:1.6}
 
-.ti-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px 28px;transition:border-color .25s}
-.ti-card:hover{border-color:var(--border-hi)}
-.ti-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
-.ti-date{font-family:'Fira Code',monospace;font-size:12px;color:var(--dim);letter-spacing:.04em}
-.badge{font-size:11px;padding:2px 10px;border-radius:100px;font-weight:600;letter-spacing:.05em}
-.badge-now{background:rgba(18,217,207,.1);color:var(--cyan);border:1px solid rgba(18,217,207,.22)}
-.badge-post{background:rgba(255,184,77,.1);color:var(--amber);border:1px solid rgba(255,184,77,.22)}
-.badge-phd{background:rgba(139,126,255,.1);color:var(--purple);border:1px solid rgba(139,126,255,.22)}
+/* ============ EDUCATION ============ */
+.ed-list{margin-top:44px}
+.ed{display:grid;grid-template-columns:160px 1fr;gap:28px;padding:26px 0;border-top:1px solid var(--rule)}
+.ed:last-child{border-bottom:1px solid var(--rule)}
+.ed-date{font-size:13px;color:var(--muted);padding-top:3px}
+.ed-date .yr{font-family:'Newsreader',serif;font-weight:500;font-size:14.5px;color:var(--ink-70);display:block;margin-bottom:6px}
+.badge{display:inline-block;font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;padding:3px 9px;border:1px solid var(--gold);color:var(--gold-d)}
+.ed-inst{font-family:'Newsreader',serif;font-weight:600;font-size:19px;color:var(--ink);margin-bottom:4px}
+.ed-role{font-size:14px;color:var(--green-d);margin-bottom:10px}
+.ed-desc{font-size:14px;color:var(--muted);line-height:1.75}
+.ed-desc i{color:var(--ink-70);font-style:italic}
+.ed-gpa{display:inline-block;margin-top:10px;font-size:12.5px;color:var(--gold-d);border-bottom:1px dotted var(--gold)}
 
-.ti-inst{font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:600;color:#fff;margin-bottom:3px}
-.ti-role{font-size:13.5px;color:var(--muted);margin-bottom:10px}
-.ti-desc{font-size:13.5px;color:var(--dim);line-height:1.65}
-.ti-gpa{
-  display:inline-block;margin-top:10px;
-  font-family:'Fira Code',monospace;font-size:12px;color:var(--amber);
-  background:rgba(255,184,77,.07);padding:3px 10px;border-radius:4px;
-  border:1px solid rgba(255,184,77,.18);
-}
+/* ============ PUBLICATIONS ============ */
+.pub-tabs{display:flex;flex-wrap:wrap;gap:0;margin-top:38px;border-bottom:1px solid var(--rule)}
+.pt{font-size:13px;font-weight:500;color:var(--muted);padding:0 0 12px;margin-right:30px;border-bottom:2px solid transparent;cursor:pointer;background:none;border-top:none;border-left:none;border-right:none;font-family:'Inter',sans-serif;transform:translateY(1px)}
+.pt.on,.pt:hover{color:var(--green-d);border-bottom-color:var(--gold)}
 
-/* ——— PUBLICATIONS ——— */
-.pub-bar{display:flex;gap:9px;margin:40px 0 28px;flex-wrap:wrap}
-.pf{
-  padding:7px 19px;border-radius:100px;border:1px solid var(--border);
-  background:transparent;color:var(--muted);font-size:13px;font-weight:500;
-  cursor:pointer;transition:all .2s;font-family:'Inter',sans-serif;
-}
-.pf.on,.pf:hover{border-color:var(--purple);color:var(--purple-light);background:rgba(139,126,255,.09)}
+.pub-list{margin-top:8px}
+.pub{display:grid;grid-template-columns:34px 1fr;gap:18px;padding:24px 0;border-bottom:1px solid var(--rule)}
+.pub-n{font-family:'Newsreader',serif;font-size:15px;color:var(--rule-2);padding-top:1px}
+.pub-title{font-family:'Newsreader',serif;font-weight:500;font-size:16px;color:var(--ink);line-height:1.5}
+.pub-journal{font-style:italic;font-size:13.5px;color:var(--green-d);margin-top:6px}
+.pub-authors{font-size:12.5px;color:var(--muted);margin-top:6px;line-height:1.6}
+.pub-authors b{color:var(--ink-70);font-weight:600}
+.pub-cat{font-size:11.5px;color:var(--gold-d);margin-top:8px;letter-spacing:.03em}
 
-.pub-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:18px}
-.pc{
-  background:var(--surface);border:1px solid var(--border);border-radius:12px;
-  padding:22px 24px;display:flex;flex-direction:column;
-  transition:border-color .25s,transform .25s;
-}
-.pc:hover{border-color:var(--border-hi);transform:translateY(-3px)}
+/* ============ TWO-COL LIST SECTIONS (conferences/training, awards) ============ */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:42px}
+.col-h{font:600 12.5px/1 'Inter';letter-spacing:.08em;text-transform:uppercase;color:var(--green-d);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--rule-2)}
+.li-item{font-size:14px;color:var(--ink-70);padding:11px 0;border-bottom:1px solid var(--rule);line-height:1.6}
+.li-item:last-child{border-bottom:none}
+.li-item .yr-tag{color:var(--muted);font-size:12.5px}
 
-.pc-year{font-family:'Fira Code',monospace;font-size:12px;color:var(--dim);margin-bottom:9px;display:flex;align-items:center;gap:7px}
-.py{padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600}
-.py26{background:rgba(18,217,207,.1);color:var(--cyan);border:1px solid rgba(18,217,207,.2)}
-.py25{background:rgba(139,126,255,.1);color:var(--purple);border:1px solid rgba(139,126,255,.2)}
-.py24{background:rgba(255,184,77,.1);color:var(--amber);border:1px solid rgba(255,184,77,.2)}
-.pyold{background:rgba(64,71,108,.2);color:var(--muted);border:1px solid var(--border)}
+/* ============ TEACHING ============ */
+.teach-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:36px;margin-top:42px}
+.teach-block .col-h{margin-bottom:14px}
+.teach-block ul{list-style:none}
+.teach-block li{font-size:13.5px;color:var(--ink-70);padding:8px 0;border-bottom:1px solid var(--rule);line-height:1.55}
+.teach-block li:last-child{border-bottom:none}
+.teach-block li span{display:block;font-size:11.5px;color:var(--muted);margin-top:2px}
 
-.pc-title{
-  font-family:'Space Grotesk',sans-serif;font-size:14.5px;font-weight:600;
-  color:#fff;line-height:1.48;margin-bottom:9px;flex-grow:1;
-}
-.pc-journal{font-size:12.5px;color:var(--cyan-light);font-style:italic;margin-bottom:10px}
-.pc-authors{font-size:12px;color:var(--dim);line-height:1.55}
-.pc-authors strong{color:var(--muted);font-weight:500}
+/* ============ SERVICE ============ */
+.svc-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:42px;border-top:1px solid var(--rule)}
+.svc-col{padding:0}
+.svc-col:first-child{border-right:1px solid var(--rule)}
+.svc-item{padding:14px 28px 14px 0;border-bottom:1px solid var(--rule);font-size:14px;color:var(--ink-70);line-height:1.55}
+.svc-col:first-child .svc-item{padding-right:28px}
+.svc-col:last-child .svc-item{padding-left:28px}
+.svc-item b{color:var(--ink);font-weight:600}
 
-.pc-cat{
-  display:inline-block;margin-top:13px;font-size:11px;
-  padding:3px 10px;border-radius:100px;font-weight:600;letter-spacing:.05em;
-}
-.cat-card{background:rgba(255,112,150,.08);color:#FF9DBB;border:1px solid rgba(255,112,150,.18)}
-.cat-evo{background:rgba(139,126,255,.08);color:var(--purple-light);border:1px solid rgba(139,126,255,.18)}
-.cat-bio{background:rgba(18,217,207,.07);color:var(--cyan-light);border:1px solid rgba(18,217,207,.18)}
-.cat-ai{background:rgba(255,184,77,.07);color:var(--amber);border:1px solid rgba(255,184,77,.18)}
+/* ============ SKILLS ============ */
+.skill-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:36px;margin-top:42px}
+.skill-h{font-family:'Newsreader',serif;font-weight:600;font-size:16px;color:var(--ink);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--rule-2)}
+.skill-grid ul{list-style:none}
+.skill-grid li{font-size:13.5px;color:var(--ink-70);padding:6px 0;position:relative;padding-left:14px}
+.skill-grid li::before{content:'—';position:absolute;left:0;color:var(--rule-2)}
 
-/* ——— SKILLS ——— */
-.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:58px}
-.sk{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:26px;transition:border-color .25s}
-.sk:hover{border-color:var(--border-hi)}
-.sk-head{display:flex;align-items:center;gap:12px;margin-bottom:18px}
-.sk-icon{
-  width:40px;height:40px;border-radius:10px;
-  display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;
-}
-.si-p{background:rgba(139,126,255,.13)}
-.si-c{background:rgba(18,217,207,.1)}
-.si-a{background:rgba(255,184,77,.1)}
-.sk-name{font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:#fff}
-.sk ul{list-style:none;display:flex;flex-direction:column;gap:7px}
-.sk li{font-size:13.5px;color:var(--muted);display:flex;align-items:center;gap:9px}
-.sk li::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--dim);flex-shrink:0}
+/* ============ CONTACT ============ */
+.contact-panel{margin-top:40px;border:1px solid var(--rule-2);background:var(--paper)}
+.c-row{display:flex;align-items:center;gap:18px;padding:20px 26px;border-bottom:1px solid var(--rule)}
+.c-row:last-child{border-bottom:none}
+.c-icon{width:19px;height:19px;flex-shrink:0;color:var(--green-d)}
+.c-icon svg{width:100%;height:100%}
+.c-body{flex-grow:1}
+.c-lbl{font:600 10.5px/1 'Inter';letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.c-val{font-size:15px;color:var(--ink)}
+a.c-row{transition:background .2s}
+a.c-row:hover{background:var(--paper-2)}
+.c-arrow{color:var(--rule-2);font-size:15px}
 
-/* ——— CONTACT ——— */
-#contact-wrap{text-align:center}
-.contact-card{
-  background:var(--surface);border:1px solid var(--border);border-radius:20px;
-  padding:56px 60px;max-width:680px;margin:56px auto 0;position:relative;overflow:hidden;
-}
-.contact-card::after{
-  content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);
-  width:240px;height:240px;
-  background:radial-gradient(circle,rgba(139,126,255,.12),transparent 70%);
-  pointer-events:none;
-}
-.contact-links{display:flex;flex-direction:column;gap:12px;margin-top:30px}
-.cl{
-  display:flex;align-items:center;gap:14px;
-  padding:13px 18px;background:var(--surface-2);border:1px solid var(--border);
-  border-radius:10px;color:inherit;transition:all .2s;
-}
-.cl:hover{border-color:var(--border-hi);background:var(--surface-3);transform:translateX(5px)}
-.cl-icon{font-size:19px;width:22px;text-align:center;flex-shrink:0}
-.cl-body{flex-grow:1;text-align:left}
-.cl-lbl{font-family:'Fira Code',monospace;font-size:11px;color:var(--dim);letter-spacing:.07em;text-transform:uppercase}
-.cl-val{font-size:14px;color:var(--text);font-weight:500;margin-top:1px}
-.cl-arr{color:var(--dim);font-size:16px}
+/* ============ FOOTER ============ */
+footer{border-top:1px solid var(--rule);padding:30px 56px;display:flex;align-items:center;justify-content:space-between;font-size:12.5px;color:var(--muted)}
+footer .serif{font-style:italic;color:var(--ink-70)}
 
-/* ——— FOOTER ——— */
-footer{
-  border-top:1px solid var(--border);padding:28px 64px;
-  display:flex;align-items:center;justify-content:space-between;
-}
-.ft{font-size:12.5px;color:var(--dim)}
-.ft-grad{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.ft-mono{font-family:'Fira Code',monospace;font-size:12px;color:var(--dim)}
-
-/* ——— SCROLL REVEAL ——— */
-.reveal{opacity:0;transform:translateY(22px);transition:opacity .65s ease,transform .65s ease}
+/* ============ REVEAL ============ */
+.reveal{opacity:0;transform:translateY(10px);transition:opacity .55s ease,transform .55s ease}
 .reveal.on{opacity:1;transform:translateY(0)}
-.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
 
-/* ——— SEPARATOR ——— */
-hr.swatch{border:none;width:52px;height:2px;background:var(--grad);border-radius:2px;margin:18px 0}
-
-/* ——— RESPONSIVE ——— */
-@media(max-width:960px){
+/* ============ RESPONSIVE ============ */
+@media(max-width:880px){
   #nav{padding:16px 24px}
   .nav-links{display:none}
-  .cw{padding:72px 24px}
-  .about-grid{grid-template-columns:1fr;gap:40px}
-  .skills-grid{grid-template-columns:1fr}
-  .hero-stats{gap:24px}
-  .contact-card{padding:36px 24px}
-  footer{padding:24px;flex-direction:column;gap:10px;text-align:center}
+  #hero{padding:140px 20px 72px}
+  .section,.section.alt>.inner{padding:64px 22px}
+  .about-cols{grid-template-columns:1fr;gap:34px}
+  .hi-grid{grid-template-columns:1fr}
+  .ed{grid-template-columns:1fr;gap:8px}
+  .two-col{grid-template-columns:1fr;gap:32px}
+  .teach-grid{grid-template-columns:1fr;gap:30px}
+  .svc-grid{grid-template-columns:1fr}
+  .svc-col:first-child{border-right:none;border-bottom:1px solid var(--rule)}
+  .svc-col:first-child .svc-item,.svc-col:last-child .svc-item{padding-left:0;padding-right:0}
+  .skill-grid{grid-template-columns:1fr 1fr;gap:28px}
+  .hero-facts{flex-wrap:wrap;row-gap:18px}
+  footer{padding:22px;flex-direction:column;gap:8px;text-align:center}
 }
-@media(max-width:600px){
-  .pub-grid{grid-template-columns:1fr}
-  .hs-num{font-size:30px}
-  .hero-stats{gap:16px}
-  .hs-div{height:34px}
+@media(max-width:560px){
+  .skill-grid{grid-template-columns:1fr}
+  .pub{grid-template-columns:24px 1fr;gap:12px}
+  .hf{padding:0 16px}
 }
 </style>
 </head>
@@ -303,540 +204,473 @@ hr.swatch{border:none;width:52px;height:2px;background:var(--grad);border-radius
 
 <!-- NAV -->
 <nav id="nav">
-  <div class="nav-logo">RGB_</div>
+  <div class="nav-name">R. G. Brajesh</div>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
-    <li><a href="#journey">Journey</a></li>
+    <li><a href="#education">Education</a></li>
     <li><a href="#publications">Publications</a></li>
-    <li><a href="#skills">Skills</a></li>
+    <li><a href="#service">Service</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
 
 <!-- HERO -->
 <section id="hero">
-  <canvas id="canvas"></canvas>
-  <div class="hero-veil"></div>
+  <svg id="contour" viewBox="0 0 1600 420" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,80 C200,40 350,140 550,90 S900,30 1100,110 S1400,150 1600,70" fill="none" stroke="#33503C" stroke-width="1" opacity="0.10"/>
+    <path d="M0,140 C220,180 380,90 600,150 S950,210 1180,140 S1450,80 1600,160" fill="none" stroke="#33503C" stroke-width="1" opacity="0.08"/>
+    <path d="M0,210 C250,170 420,250 650,200 S1000,140 1220,220 S1480,260 1600,200" fill="none" stroke="#8C6A2E" stroke-width="1" opacity="0.09"/>
+    <path d="M0,270 C230,310 410,230 640,290 S980,340 1200,270 S1460,220 1600,300" fill="none" stroke="#33503C" stroke-width="1" opacity="0.07"/>
+    <path d="M0,340 C240,300 430,370 660,330 S1010,280 1240,350 S1470,390 1600,330" fill="none" stroke="#8C6A2E" stroke-width="1" opacity="0.07"/>
+  </svg>
+
   <div class="hero-inner">
-    <div class="hero-pill">Assistant Professor &nbsp;·&nbsp; Computational Biologist</div>
-    <h1 class="hero-name">R. G.&nbsp;<span>Brajesh</span></h1>
-    <p class="hero-sub">PhD &nbsp;·&nbsp; Bioinformatics &amp; Microbial Evolution &amp; Machine Learning</p>
-    <div class="hero-stats">
-      <div>
-        <div class="hs-num">14</div>
-        <div class="hs-lbl">Publications</div>
-      </div>
-      <div class="hs-div"></div>
-      <div>
-        <div class="hs-num">10+</div>
-        <div class="hs-lbl">Years Research</div>
-      </div>
-      <div class="hs-div"></div>
-      <div>
-        <div class="hs-num">5</div>
-        <div class="hs-lbl">Institutions</div>
-      </div>
-      <div class="hs-div"></div>
-      <div>
-        <div class="hs-num">₹15Cr</div>
-        <div class="hs-lbl">Grants Secured</div>
-      </div>
+    <div class="hero-eyebrow">Faculty Profile</div>
+    <h1 class="hero-name">R.&nbsp;G.&nbsp;Brajesh, PhD</h1>
+    <p class="hero-title">Assistant Professor, Biomedical Engineering &amp; Bioinformatics</p>
+    <p class="hero-org">Chhattisgarh Swami Vivekanand Technical University (CSVTU), Bhilai</p>
+
+    <div class="hero-contact">
+      <a href="mailto:brajeshrg@csvtu.ac.in">brajeshrg@csvtu.ac.in</a>
+      <span class="hero-dot"></span>
+      <a href="tel:+917880273521">+91 7880 273 521</a>
     </div>
-    <a href="#about" class="btn-primary">Explore Research →</a>
+
+    <p class="hero-statement">His work sits at the intersection of computational biology, microbial evolution, and machine learning — using theoretical models and laboratory experiments to understand how genetic mutation shapes the fitness of living systems.</p>
+
+    <div class="hero-facts">
+      <div class="hf"><div class="hf-num">14</div><div class="hf-lbl">Publications</div></div>
+      <div class="hf-div"></div>
+      <div class="hf"><div class="hf-num">10+</div><div class="hf-lbl">Yrs in Research</div></div>
+      <div class="hf-div"></div>
+      <div class="hf"><div class="hf-num">5</div><div class="hf-lbl">Institutions</div></div>
+      <div class="hf-div"></div>
+      <div class="hf"><div class="hf-num">₹15 Cr</div><div class="hf-lbl">Grants Secured</div></div>
+    </div>
+
+    <div class="hero-cta">
+      <a href="#publications" class="cta-link">View Publications</a>
+      <a href="#contact" class="cta-link">Get in Touch</a>
+    </div>
   </div>
 </section>
 
 <!-- ABOUT -->
-<div class="cw" id="about">
-  <span class="eyebrow">// about</span>
-  <h2 class="section-title">Where Biology<br>Meets Computation</h2>
-  <hr class="swatch">
-  <div class="about-grid">
+<section class="section" id="about">
+  <span class="kicker">About</span>
+  <h2 class="sec-title">Research Focus &amp; Background</h2>
+  <hr class="rule-short">
+
+  <div class="about-cols">
     <div class="about-body reveal">
-      <p>I am an Assistant Professor at CSVTU Bhilai, working at the intersection of computational biology, bioinformatics, and machine learning. My research spans theoretical modelling and experimental validation — with a core focus on how genetic mutations shape the fitness of living organisms.</p>
-      <p>From mapping the fitness landscapes of <em>E. coli</em> at IIT Bombay to studying metabolic networks at Virginia Tech and collaborating on precision oncology models at the Medical College of Wisconsin, my work bridges the molecular and the mathematical.</p>
-      <p>Beyond the bench, I lead MOOC courses on SWAYAM, drive CSVTU's innovation ecosystem as IIC President, and mentor the next generation of computational biologists.</p>
-      <div class="tag-row">
-        <span class="tag tp">Machine Learning</span>
-        <span class="tag tc">Microbial Evolution</span>
-        <span class="tag tp">Bioinformatics</span>
-        <span class="tag ta">Fitness Landscapes</span>
-        <span class="tag tc">Computational Biology</span>
-        <span class="tag tp">Drug Design</span>
-        <span class="tag ta">Cell Physiology</span>
-        <span class="tag tc">Systems Biology</span>
-      </div>
+      <p>Dr. Brajesh is an Assistant Professor at CSVTU Bhilai, working across computational biology, bioinformatics, and machine learning. His research spans theoretical modelling and experimental validation, centred on how genetic mutations shape the fitness of living organisms.</p>
+      <p>His doctoral and postdoctoral work mapped the fitness landscapes of <i style="font-style:italic">E. coli</i> at IIT Bombay and the metabolic networks of <i style="font-style:italic">Methylobacterium extorquens</i> at Virginia Tech. He continues to collaborate with the Medical College of Wisconsin on precision-oncology and cardiotoxicity models.</p>
+      <p>At CSVTU, he leads MOOC courses on the SWAYAM platform, serves as President of the Institute Innovation Cell, and has secured over ₹15 crore in national grants for the university's innovation infrastructure.</p>
+      <p class="tag-line"><b>Research interests —</b> Machine Learning · Microbial Evolution · Bioinformatics · Fitness Landscapes · Computational Biology · Drug Design · Cell Physiology · Systems Biology</p>
     </div>
-    <div class="about-cards">
-      <div class="ac reveal d1">
-        <div class="ac-icon">🔬</div>
-        <div class="ac-title">Experimental Research</div>
-        <div class="ac-text">ELISA assays, bacterial gene knockouts, evolutionary experiments, and animal handling — where hypotheses become data.</div>
-      </div>
-      <div class="ac reveal d2">
-        <div class="ac-icon">🧮</div>
-        <div class="ac-title">Theoretical Modelling</div>
-        <div class="ac-text">Mathematical modelling of fitness landscapes, genetic regulatory networks, and evolutionary dynamics using MATLAB and R.</div>
-      </div>
-      <div class="ac reveal d3">
-        <div class="ac-icon">🤝</div>
-        <div class="ac-title">Global Collaborations</div>
-        <div class="ac-text">Active collaborations with the Medical College of Wisconsin, Virginia Tech, and IIT Bombay — publishing across biology and medicine.</div>
-      </div>
-      <div class="ac reveal d4">
-        <div class="ac-icon">🏆</div>
-        <div class="ac-title">Innovation Leadership</div>
-        <div class="ac-text">Secured ₹15 Cr+ in grants (NIDHI i-TBI &amp; AIC) to establish CSVTU's innovation and entrepreneurship infrastructure.</div>
-      </div>
+
+    <div class="hi-grid">
+      <div class="hi reveal"><div class="hi-t">Experimental Research</div><div class="hi-d">ELISA assays, bacterial gene knockouts, evolutionary experiments, and murine handling.</div></div>
+      <div class="hi reveal"><div class="hi-t">Theoretical Modelling</div><div class="hi-d">Mathematical modelling of fitness landscapes and gene regulatory networks in MATLAB and R.</div></div>
+      <div class="hi reveal"><div class="hi-t">Global Collaboration</div><div class="hi-d">Active partnerships with the Medical College of Wisconsin, Virginia Tech, and IIT Bombay.</div></div>
+      <div class="hi reveal"><div class="hi-t">Innovation Leadership</div><div class="hi-d">₹15 Cr+ secured through NIDHI i-TBI and AIC grants for CSVTU's innovation ecosystem.</div></div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- JOURNEY -->
-<div class="cw" id="journey">
-  <span class="eyebrow">// career &amp; education</span>
-  <h2 class="section-title">The Research Journey</h2>
-  <hr class="swatch">
-  <p class="section-lead">From engineering fundamentals to the frontier of computational biology — across four cities and three countries of collaboration.</p>
+<!-- EDUCATION -->
+<section class="section alt" id="education">
+  <div class="inner">
+    <span class="kicker">Education &amp; Career</span>
+    <h2 class="sec-title">Academic &amp; Research Appointments</h2>
+    <p class="sec-lead">A research path from biotechnology fundamentals through doctoral and postdoctoral work to a faculty appointment in computational biology.</p>
 
-  <div class="timeline">
+    <div class="ed-list">
 
-    <div class="ti reveal">
-      <div class="ti-dot dot-cyan"><div class="ti-dot-core"></div></div>
-      <div class="ti-card">
-        <div class="ti-meta">
-          <span class="ti-date">March 2023 → Present</span>
-          <span class="badge badge-now">Current</span>
+      <div class="ed reveal">
+        <div class="ed-date"><span class="yr">2023 — Present</span><span class="badge">Current</span></div>
+        <div>
+          <div class="ed-inst">CSVTU, Bhilai</div>
+          <div class="ed-role">Assistant Professor · Biomedical Engineering &amp; Bioinformatics</div>
+          <div class="ed-desc">Leading research in machine learning, bioinformatics, and computational biology. HoD in-charge, IIC President, and coordinator of SWAYAM MOOC courses including <i>Microbial Technology</i> and <i>Fundamentals of Computational Biology</i>. Secured ₹15 Cr in NIDHI i-TBI and AIC grants for the university's innovation infrastructure.</div>
         </div>
-        <div class="ti-inst">CSVTU, Bhilai — Chhattisgarh</div>
-        <div class="ti-role">Assistant Professor · Department of Biomedical Engineering &amp; Bioinformatics</div>
-        <div class="ti-desc">Leading research in ML, bioinformatics, and computational biology. HoD in charge, IIC President, and coordinator of MOOC courses on SWAYAM (<em>Microbial Technology</em>, <em>Computational Biology</em>, <em>Genetic Engineering</em>). Secured ₹5 Cr NIDHI i-TBI and ₹10 Cr AIC grants for CSVTU's innovation infrastructure. Currently teaching Research Methodology, Computational Biology, Bioinformatics, Data Visualisation, and Drug Design.</div>
       </div>
-    </div>
 
-    <div class="ti reveal">
-      <div class="ti-dot dot-amber"><div class="ti-dot-core"></div></div>
-      <div class="ti-card">
-        <div class="ti-meta">
-          <span class="ti-date">April 2020 → December 2020</span>
-          <span class="badge badge-post">Post-Doc</span>
+      <div class="ed reveal">
+        <div class="ed-date"><span class="yr">Apr — Dec 2020</span><span class="badge">Postdoc</span></div>
+        <div>
+          <div class="ed-inst">Virginia Tech, Blacksburg</div>
+          <div class="ed-role">Post-Doctoral Scholar · Dept. of Biological Sciences · Advisor: Prof. Jeremy Draghi</div>
+          <div class="ed-desc">Constructed the metabolic and fitness landscape of <i>Methylobacterium extorquens</i>, linking experimental evolution to computational landscape theory.</div>
         </div>
-        <div class="ti-inst">Virginia Tech, Blacksburg</div>
-        <div class="ti-role">Post-Doctoral Scholar · Department of Biological Sciences · Advisor: Prof. Jeremy Draghi</div>
-        <div class="ti-desc">Metabolic and fitness landscape construction of <em>Methylobacterium extorquens</em>. Bridging experimental evolution with computational landscape theory in a highly collaborative environment.</div>
       </div>
-    </div>
 
-    <div class="ti reveal">
-      <div class="ti-dot dot-purple"><div class="ti-dot-core"></div></div>
-      <div class="ti-card">
-        <div class="ti-meta">
-          <span class="ti-date">January 2015 → March 2023</span>
-          <span class="badge badge-phd">PhD</span>
+      <div class="ed reveal">
+        <div class="ed-date"><span class="yr">2015 — 2023</span><span class="badge">PhD</span></div>
+        <div>
+          <div class="ed-inst">Indian Institute of Technology, Bombay</div>
+          <div class="ed-role">PhD · Chemical Engineering · Advisor: Prof. Supreet Saini</div>
+          <div class="ed-desc">Thesis: <i>"Theoretical and experimental studies in microbial evolution."</i> Modelled genetic regulatory networks and designed evolutionary experiments to study how mutation shapes organismal fitness. Best Poster, BES India 2018; presented at international conferences in Spain.</div>
+          <span class="ed-gpa">GPA 7.86 / 10</span>
         </div>
-        <div class="ti-inst">IIT Bombay</div>
-        <div class="ti-role">PhD · Chemical Engineering · Advisor: Prof. Supreet Saini</div>
-        <div class="ti-desc">Thesis: <em>"Theoretical and experimental studies in microbial evolution."</em> Eight years of investigation into how mutations shape organismal fitness — modelling genetic regulatory networks, designing evolutionary experiments, and publishing foundational work in systems biology. Won best poster at BES India 2018 and presented at international conferences in Spain.</div>
-        <span class="ti-gpa">GPA: 7.86 / 10</span>
       </div>
-    </div>
 
-    <div class="ti reveal">
-      <div class="ti-dot dot-purple"><div class="ti-dot-core"></div></div>
-      <div class="ti-card">
-        <div class="ti-meta"><span class="ti-date">2012 → 2014</span></div>
-        <div class="ti-inst">Anna University, Chennai</div>
-        <div class="ti-role">M.Tech · Biotechnology · Advisor: Prof. S. Ramalingam</div>
-        <div class="ti-desc">Thesis: Exploring microenvironmental conditions to enhance 3-Hydroxypropionic acid production in <em>Lactobacillus reuteri</em>. Foundational work in metabolic engineering of lactic acid bacteria.</div>
-        <span class="ti-gpa">GPA: 8.2 / 10</span>
+      <div class="ed reveal">
+        <div class="ed-date"><span class="yr">2012 — 2014</span><span class="badge">M.Tech</span></div>
+        <div>
+          <div class="ed-inst">Anna University, Chennai</div>
+          <div class="ed-role">M.Tech · Biotechnology · Advisor: Prof. S. Ramalingam</div>
+          <div class="ed-desc">Thesis: Exploring microenvironmental conditions to enhance 3-Hydroxypropionic acid production in <i>Lactobacillus reuteri</i>.</div>
+          <span class="ed-gpa">GPA 8.2 / 10</span>
+        </div>
       </div>
-    </div>
 
-    <div class="ti reveal">
-      <div class="ti-dot dot-cyan"><div class="ti-dot-core"></div></div>
-      <div class="ti-card">
-        <div class="ti-meta"><span class="ti-date">2008 → 2012</span></div>
-        <div class="ti-inst">NIT Raipur</div>
-        <div class="ti-role">B.Tech · Biotechnology · Advisor: Prof. Tushar Yadav</div>
-        <div class="ti-desc">Thesis: Extraction and characterisation of microbial pigments. Where curiosity about living systems was first formalised into scientific method — and 1st-place robotics trophies were collected along the way.</div>
-        <span class="ti-gpa">GPA: 7.87 / 10</span>
+      <div class="ed reveal">
+        <div class="ed-date"><span class="yr">2008 — 2012</span><span class="badge">B.Tech</span></div>
+        <div>
+          <div class="ed-inst">National Institute of Technology, Raipur</div>
+          <div class="ed-role">B.Tech · Biotechnology · Advisor: Prof. Tushar Yadav</div>
+          <div class="ed-desc">Thesis: Extraction and characterisation of microbial pigments.</div>
+          <span class="ed-gpa">GPA 7.87 / 10</span>
+        </div>
       </div>
-    </div>
 
+    </div>
   </div>
-</div>
+</section>
 
 <!-- PUBLICATIONS -->
-<div class="cw" id="publications">
-  <span class="eyebrow">// publications</span>
-  <h2 class="section-title">Research Output</h2>
-  <hr class="swatch">
-  <p class="section-lead">14 peer-reviewed works spanning microbial evolution, precision oncology, systems biology, and AI-based image analysis.</p>
+<section class="section" id="publications">
+  <span class="kicker">Publications</span>
+  <h2 class="sec-title">Peer-Reviewed Works</h2>
+  <p class="sec-lead">14 publications spanning microbial evolution, precision oncology, systems biology, and computational imaging (2015 – 2026).</p>
 
-  <div class="pub-bar">
-    <button class="pf on" data-cat="all">All &nbsp;(14)</button>
-    <button class="pf" data-cat="evo">Evolution &amp; Systems</button>
-    <button class="pf" data-cat="card">Cardiology &amp; Oncology</button>
-    <button class="pf" data-cat="bio">Biotechnology</button>
-    <button class="pf" data-cat="ai">AI &amp; Imaging</button>
+  <div class="pub-tabs">
+    <button class="pt on" data-cat="all">All</button>
+    <button class="pt" data-cat="evo">Evolution &amp; Systems</button>
+    <button class="pt" data-cat="card">Cardiology &amp; Oncology</button>
+    <button class="pt" data-cat="bio">Biotechnology</button>
+    <button class="pt" data-cat="ai">AI &amp; Imaging</button>
   </div>
 
-  <div class="pub-grid">
+  <div class="pub-list">
 
-    <div class="pc reveal" data-cat="card">
-      <div class="pc-year"><span class="py py26">2026</span></div>
-      <div class="pc-title">Human iPSC-derived and conventional cancer models in precision oncology: advancing patient-specific therapies from bench to bedside</div>
-      <div class="pc-journal">Journal of Experimental and Clinical Cancer Research, 45</div>
-      <div class="pc-authors">Pant T, <strong>Brajesh RG</strong>, Day BW, Solomon AD, Juric M, Zielonka J, Bai X</div>
-      <span class="pc-cat cat-card">ONCOLOGY</span>
+    <div class="pub reveal" data-cat="card">
+      <div class="pub-n">1.</div>
+      <div>
+        <div class="pub-title">Human iPSC-derived and conventional cancer models in precision oncology: advancing patient-specific therapies from bench to bedside</div>
+        <div class="pub-journal">Journal of Experimental and Clinical Cancer Research, 45 (2026)</div>
+        <div class="pub-authors">Pant T, <b>Brajesh RG</b>, Day BW, Solomon AD, Juric M, Zielonka J, Bai X</div>
+        <div class="pub-cat">Oncology</div>
+      </div>
     </div>
 
-    <div class="pc reveal" data-cat="card">
-      <div class="pc-year"><span class="py py25">2025</span></div>
-      <div class="pc-title">Regulation by N-acetyl lysyltyrosylcysteine amide of the immunomodulatory network improves cardiac function in type 2 diabetic mice</div>
-      <div class="pc-journal">Circulation, 152(3)</div>
-      <div class="pc-authors">Pant T, Morelos A, Jones D, <strong>Brajesh RG</strong>, Day B, Pritchard K</div>
-      <span class="pc-cat cat-card">CARDIOLOGY</span>
+    <div class="pub reveal" data-cat="card">
+      <div class="pub-n">2.</div>
+      <div>
+        <div class="pub-title">Regulation by N-acetyl lysyltyrosylcysteine amide of the immunomodulatory network improves cardiac function in type 2 diabetic mice</div>
+        <div class="pub-journal">Circulation, 152(3) (2025)</div>
+        <div class="pub-authors">Pant T, Morelos A, Jones D, <b>Brajesh RG</b>, Day B, Pritchard K</div>
+        <div class="pub-cat">Cardiology</div>
+      </div>
     </div>
 
-    <div class="pc reveal" data-cat="card">
-      <div class="pc-year"><span class="py py25">2025</span></div>
-      <div class="pc-title">KYC and hE-HMGB1-BP improve hemorheology and reduce chronic lung injury via immunological mechanisms</div>
-      <div class="pc-journal">Free Radical Biology and Medicine, 240(1)</div>
-      <div class="pc-authors">Pant T, Morelos A, Jones D, <strong>Brajesh RG</strong>, Day B, Pritchard K</div>
-      <span class="pc-cat cat-card">CARDIOLOGY</span>
+    <div class="pub reveal" data-cat="card">
+      <div class="pub-n">3.</div>
+      <div>
+        <div class="pub-title">KYC, a multimodal agent, and hE-HMGB1-BP, an apoE mimetic that targets HMGB1, improve hemorheology and reduce chronic lung injury via regulating sterile induction of immunological mechanisms</div>
+        <div class="pub-journal">Free Radical Biology and Medicine, 240(1), S81 (2025)</div>
+        <div class="pub-authors">Pant T, Morelos A, Jones D, <b>Brajesh RG</b>, Day B, Pritchard K</div>
+        <div class="pub-cat">Cardiology</div>
+      </div>
     </div>
 
-    <div class="pc reveal" data-cat="evo">
-      <div class="pc-year"><span class="py py25">2025</span></div>
-      <div class="pc-title">Effects of resource packaging on the adaptive and pleiotropic consequences of evolution</div>
-      <div class="pc-journal">npj Systems Biology and Applications, 11(1), 1–9</div>
-      <div class="pc-authors">Ahlawat N, Venkataraman P, <strong>Brajesh RG</strong>, Saini S</div>
-      <span class="pc-cat cat-evo">EVOLUTION</span>
+    <div class="pub reveal" data-cat="evo">
+      <div class="pub-n">4.</div>
+      <div>
+        <div class="pub-title">Effects of resource packaging on the adaptive and pleiotropic consequences of evolution</div>
+        <div class="pub-journal">npj Systems Biology and Applications, 11(1), 1–9 (2025)</div>
+        <div class="pub-authors">Ahlawat N, Venkataraman P, <b>Brajesh RG</b>, Saini S</div>
+        <div class="pub-cat">Evolutionary Biology</div>
+      </div>
     </div>
 
-    <div class="pc reveal" data-cat="card">
-      <div class="pc-year"><span class="py py25">2025</span></div>
-      <div class="pc-title">Chemotherapy-related cardiotoxicity employing hiPSC-derived cardiomyocyte models for drug screening and genetic/epigenetic variant identification</div>
-      <div class="pc-journal">International Journal of Molecular Sciences, 26(9), 3966</div>
-      <div class="pc-authors">Solomon AD, Dabral S, <strong>Brajesh RG</strong>, Day BW, Juric M, Zielonka J, Bosnjak ZJ, Pant T</div>
-      <span class="pc-cat cat-card">CARDIOLOGY</span>
+    <div class="pub reveal" data-cat="card">
+      <div class="pub-n">5.</div>
+      <div>
+        <div class="pub-title">Understanding the Mechanisms of Chemotherapy-Related Cardiotoxicity Employing hiPSC-Derived Cardiomyocyte Models for Drug Screening and the Identification of Genetic and Epigenetic Variants</div>
+        <div class="pub-journal">International Journal of Molecular Sciences, 26(9), 3966 (2025)</div>
+        <div class="pub-authors">Solomon AD, Dabral S, <b>Brajesh RG</b>, Day BW, Juric M, Zielonka J, Bosnjak ZJ, Pant T</div>
+        <div class="pub-cat">Oncology / Cardiology</div>
+      </div>
     </div>
 
-    <div class="pc reveal" data-cat="ai">
-      <div class="pc-year"><span class="py py25">Submitted</span></div>
-      <div class="pc-title">ABHINAW: A method for Automatic Evaluation of Typography within AI-Generated Images</div>
-      <div class="pc-journal">Manuscript under review</div>
-      <div class="pc-authors">Jagtap A, Tapas N, <strong>Brajesh RG</strong></div>
-      <span class="pc-cat cat-ai">AI &amp; IMAGING</span>
+    <div class="pub reveal" data-cat="ai">
+      <div class="pub-n">6.</div>
+      <div>
+        <div class="pub-title">ABHINAW: A Method for Automatic Evaluation of Typography within AI-Generated Images</div>
+        <div class="pub-journal">Manuscript submitted</div>
+        <div class="pub-authors">Jagtap A, Tapas N, <b>Brajesh RG</b></div>
+        <div class="pub-cat">AI &amp; Imaging</div>
+      </div>
     </div>
 
-    <div class="pc reveal" data-cat="evo">
-      <div class="pc-year"><span class="py py25">Submitted</span></div>
-      <div class="pc-title">Adaptive and pleiotropic effects of evolution in synonymous sugar environments</div>
-      <div class="pc-journal">Manuscript under review</div>
-      <div class="pc-authors">Venkataraman P, Ahlawat N, Saini S, <strong>Brajesh RG</strong></div>
-      <span class="pc-cat cat-evo">EVOLUTION</span>
+    <div class="pub reveal" data-cat="evo">
+      <div class="pub-n">7.</div>
+      <div>
+        <div class="pub-title">Adaptive and Pleiotropic Effects of Evolution in Synonymous Sugar Environments</div>
+        <div class="pub-journal">Manuscript submitted</div>
+        <div class="pub-authors">Venkataraman P, Ahlawat N, Saini S, <b>Brajesh RG</b></div>
+        <div class="pub-cat">Evolutionary Biology</div>
+      </div>
     </div>
 
-    <div class="pc reveal" data-cat="evo">
-      <div class="pc-year"><span class="py py24">2024</span></div>
-      <div class="pc-title">Convergent genetic adaptation of Escherichia coli in minimal media leads to pleiotropic divergence</div>
-      <div class="pc-journal">Frontiers in Molecular Biosciences, 11, 1286824</div>
-      <div class="pc-authors">Venkataraman P, Nagendra P, Ahlawat N, Saini S, <strong>Brajesh RG</strong></div>
-      <span class="pc-cat cat-evo">EVOLUTION</span>
+    <div class="pub reveal" data-cat="evo">
+      <div class="pub-n">8.</div>
+      <div>
+        <div class="pub-title">Convergent Genetic Adaptation of Escherichia coli in Minimal Media Leads to Pleiotropic Divergence</div>
+        <div class="pub-journal">Frontiers in Molecular Biosciences, 11, 1286824 (2024)</div>
+        <div class="pub-authors">Venkataraman P, Nagendra P, Ahlawat N, Saini S, <b>Brajesh RG</b></div>
+        <div class="pub-cat">Evolutionary Biology</div>
+      </div>
     </div>
 
-    <div class="pc reveal" data-cat="evo">
-      <div class="pc-year"><span class="py pyold">2019</span></div>
-      <div class="pc-title">Distribution of fitness effects of mutations obtained from a simple genetic regulatory network model</div>
-      <div class="pc-journal">Scientific Reports, 9, 9842</div>
-      <div class="pc-authors"><strong>Brajesh RG</strong>, Dutta D, Saini S</div>
-      <span class="pc-cat cat-evo">SYSTEMS BIOLOGY</span>
+    <div class="pub reveal" data-cat="evo">
+      <div class="pub-n">9.</div>
+      <div>
+        <div class="pub-title">Distribution of Fitness Effects of Mutations Obtained from a Simple Genetic Regulatory Network Model</div>
+        <div class="pub-journal">Scientific Reports, 9, 9842 (2019)</div>
+        <div class="pub-authors"><b>Brajesh RG</b>, Dutta D, Saini S</div>
+        <div class="pub-cat">Systems Biology</div>
+      </div>
     </div>
 
-    <div class="pc reveal" data-cat="evo">
-      <div class="pc-year"><span class="py pyold">2019</span></div>
-      <div class="pc-title">Mathematical modeling of movement on fitness landscapes</div>
-      <div class="pc-journal">BMC Systems Biology, 13, 25</div>
-      <div class="pc-authors">Gerald N, Dutta D, <strong>Brajesh RG</strong>, Saini S</div>
-      <span class="pc-cat cat-evo">MODELLING</span>
+    <div class="pub reveal" data-cat="evo">
+      <div class="pub-n">10.</div>
+      <div>
+        <div class="pub-title">Mathematical Modeling of Movement on Fitness Landscapes</div>
+        <div class="pub-journal">BMC Systems Biology, 13, 25 (2019)</div>
+        <div class="pub-authors">Gerald N, Dutta D, <b>Brajesh RG</b>, Saini S</div>
+        <div class="pub-cat">Systems Biology</div>
+      </div>
     </div>
 
-    <div class="pc reveal" data-cat="evo">
-      <div class="pc-year"><span class="py pyold">2017</span></div>
-      <div class="pc-title">Optimal parameter values for the control of gene regulation</div>
-      <div class="pc-journal">Mol. BioSyst, 13, 796</div>
-      <div class="pc-authors"><strong>Brajesh RG</strong>, Raj N, Saini S</div>
-      <span class="pc-cat cat-evo">SYSTEMS BIOLOGY</span>
+    <div class="pub reveal" data-cat="evo">
+      <div class="pub-n">11.</div>
+      <div>
+        <div class="pub-title">Optimal Parameter Values for the Control of Gene Regulation</div>
+        <div class="pub-journal">Molecular BioSystems, 13, 796 (2017)</div>
+        <div class="pub-authors"><b>Brajesh RG</b>, Raj N, Saini S</div>
+        <div class="pub-cat">Systems Biology</div>
+      </div>
     </div>
 
-    <div class="pc reveal" data-cat="evo">
-      <div class="pc-year"><span class="py pyold">2016</span></div>
-      <div class="pc-title">Analysis of a strategy for cooperating cells to survive the presence of cheaters</div>
-      <div class="pc-journal">Mol. BioSyst, 12, 3338</div>
-      <div class="pc-authors">Prajapat MK, Shroff I, <strong>Brajesh RG</strong>, Saini S</div>
-      <span class="pc-cat cat-evo">EVOLUTION</span>
+    <div class="pub reveal" data-cat="evo">
+      <div class="pub-n">12.</div>
+      <div>
+        <div class="pub-title">Analysis of a Strategy for Cooperating Cells to Survive the Presence of Cheaters</div>
+        <div class="pub-journal">Molecular BioSystems, 12, 3338 (2016)</div>
+        <div class="pub-authors">Prajapat MK, Shroff I, <b>Brajesh RG</b>, Saini S</div>
+        <div class="pub-cat">Evolutionary Biology</div>
+      </div>
     </div>
 
-    <div class="pc reveal" data-cat="bio">
-      <div class="pc-year"><span class="py pyold">2015</span></div>
-      <div class="pc-title">Bio-transformation of Glycerol to 3-Hydroxypropionic Acid Using Resting Cells of Lactobacillus reuteri</div>
-      <div class="pc-journal">Current Microbiology, 71, 517–523</div>
-      <div class="pc-authors">Gopi GR, Nehru G, Suppuram P, Balasubramaniyam S, <strong>Brajesh RG</strong>, Ramalingam S</div>
-      <span class="pc-cat cat-bio">BIOTECHNOLOGY</span>
+    <div class="pub reveal" data-cat="bio">
+      <div class="pub-n">13.</div>
+      <div>
+        <div class="pub-title">Bio-Transformation of Glycerol to 3-Hydroxypropionic Acid Using Resting Cells of Lactobacillus Reuteri</div>
+        <div class="pub-journal">Current Microbiology, 71, 517–523 (2015)</div>
+        <div class="pub-authors">Gopi GR, Nehru G, Suppuram P, Balasubramaniyam S, <b>Brajesh RG</b>, Ramalingam S</div>
+        <div class="pub-cat">Biotechnology</div>
+      </div>
     </div>
 
-    <div class="pc reveal" data-cat="bio">
-      <div class="pc-year"><span class="py pyold">2015</span></div>
-      <div class="pc-title">Enhanced Expression of 3-Hydroxypropionic Acid Pathway Genes and Its Production Impact in Lactobacillus reuteri</div>
-      <div class="pc-journal">Food Technology Biotechnology, 53, 331–336</div>
-      <div class="pc-authors">Gopi GR, Ganesh N, Pandiaraj S, Balasubramaniyam S, <strong>Brajesh RG</strong>, Ramalingam S</div>
-      <span class="pc-cat cat-bio">BIOTECHNOLOGY</span>
+    <div class="pub reveal" data-cat="bio">
+      <div class="pub-n">14.</div>
+      <div>
+        <div class="pub-title">A Study on Enhanced Expression of 3-Hydroxypropionic Acid Pathway Genes and Impact on Its Production in Lactobacillus Reuteri</div>
+        <div class="pub-journal">Food Technology &amp; Biotechnology, 53, 331–336 (2015)</div>
+        <div class="pub-authors">Gopi GR, Ganesh N, Pandiaraj S, Balasubramaniyam S, <b>Brajesh RG</b>, Ramalingam S</div>
+        <div class="pub-cat">Biotechnology</div>
+      </div>
     </div>
 
   </div>
-</div>
+</section>
+
+<!-- CONFERENCES & TRAINING -->
+<section class="section alt" id="conferences">
+  <div class="inner">
+    <span class="kicker">Conferences &amp; Training</span>
+    <h2 class="sec-title">Presentations, Schools &amp; Workshops</h2>
+
+    <div class="two-col">
+      <div>
+        <div class="col-h">Conferences &amp; Presentations</div>
+        <div class="li-item reveal"><span class="yr-tag">2019 ·</span> Poster, "A model to study distribution of fitness effects in genetic networks," BacNet19, Sant Feliu de Guíxols, Spain</div>
+        <div class="li-item reveal"><span class="yr-tag">2019 ·</span> Oral presentation, Research Scholar Symposium, IIT Bombay</div>
+        <div class="li-item reveal"><span class="yr-tag">2018 ·</span> Best Poster Award, Annual Meeting of Biological Engineering Society India, IIT Bombay</div>
+        <div class="li-item reveal"><span class="yr-tag">2014 ·</span> Poster, Adenylate Energy Charge &amp; NAD⁺/NADH assays, Jawaharlal Nehru University, New Delhi</div>
+        <div class="li-item reveal"><span class="yr-tag">2014 ·</span> Poster, "Resting Cells Technology," AVIDADHAM'14, Anna University, Chennai</div>
+      </div>
+      <div>
+        <div class="col-h">Schools &amp; Workshops</div>
+        <div class="li-item reveal"><span class="yr-tag">2017 ·</span> Winter School on Quantitative Systems Biology, ICTS Bangalore (15 days)</div>
+        <div class="li-item reveal"><span class="yr-tag">2011 ·</span> Summer Project, Molecular &amp; Biochemical Analysis of Hemoglobinopathies, Institute of Genetics and Hospital for Genetic Diseases, Hyderabad (45 days)</div>
+        <div class="li-item reveal"><span class="yr-tag">2022 ·</span> Conducted a 4-day workshop on Computational Structure-Based &amp; Ligand-Based Drug Design using Schrödinger</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEACHING -->
+<section class="section" id="teaching">
+  <span class="kicker">Teaching</span>
+  <h2 class="sec-title">Courses &amp; Mentorship</h2>
+
+  <div class="teach-grid">
+    <div class="teach-block">
+      <div class="col-h">Current Courses — CSVTU</div>
+      <ul>
+        <li>Research Methodology<span>PhD &amp; ADF scholars</span></li>
+        <li>Fundamentals of Computational Biology<span>B.Tech, Dept. of AI</span></li>
+        <li>Data Visualization<span>B.Tech, Dept. of AI</span></li>
+        <li>Bioinformatics<span>M.Tech, Biomedical &amp; Bioinformatics</span></li>
+        <li>Drug Delivery &amp; Drug Design<span>M.Tech, Biomedical &amp; Bioinformatics</span></li>
+      </ul>
+    </div>
+    <div class="teach-block">
+      <div class="col-h">MOOC Courses — SWAYAM</div>
+      <ul>
+        <li>Microbial Technology<span>Course Coordinator &amp; Tutor, since July 2024</span></li>
+        <li>Fundamentals of Computational Biology<span>Course Coordinator &amp; Tutor, since July 2023</span></li>
+        <li>Genetic Engineering &amp; Its Recent Advancement<span>Tutor, July 2023</span></li>
+        <li>Fundamentals of MATLAB Programming<span>CSDIE — two batches, 30+ trained</span></li>
+      </ul>
+    </div>
+    <div class="teach-block">
+      <div class="col-h">Teaching Assistantships — IIT Bombay</div>
+      <ul>
+        <li>Evolutionary Dynamics (CL 717)<span>Instructor: Prof. Supreet Saini, 2017–18</span></li>
+        <li>Heat Transfer (CL 246)<span>Instructor: Prof. Supreet Saini, 2016–17</span></li>
+        <li>UG Chemical Engineering Lab (CL 335, CL 433)<span>Profs. Mehra &amp; Sunthar, 2015–18</span></li>
+        <li>NPTEL — Introduction to Evolutionary Dynamics<span>Instructor: Prof. Supreet Saini, 2017</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE -->
+<section class="section alt" id="service">
+  <div class="inner">
+    <span class="kicker">Service &amp; Leadership</span>
+    <h2 class="sec-title">Academic Service at CSVTU Bhilai</h2>
+    <p class="sec-lead">Administrative and institutional roles held alongside teaching and research.</p>
+
+    <div class="svc-grid">
+      <div class="svc-col">
+        <div class="svc-item reveal"><b>President,</b> Institute Innovation Cell (IIC)</div>
+        <div class="svc-item reveal"><b>HoD In-Charge,</b> Dept. of Biomedical Engineering &amp; Bioinformatics</div>
+        <div class="svc-item reveal"><b>Professor In-Charge,</b> Research &amp; Institutional Funding</div>
+        <div class="svc-item reveal"><b>Professor In-Charge,</b> International University Centre</div>
+        <div class="svc-item reveal"><b>Professor In-Charge,</b> Institute Innovation Cell</div>
+        <div class="svc-item reveal"><b>Professor In-Charge,</b> Coding &amp; Robotics Club</div>
+      </div>
+      <div class="svc-col">
+        <div class="svc-item reveal"><b>Member Secretary,</b> Institute Ethical Committee</div>
+        <div class="svc-item reveal"><b>Professor In-Charge,</b> Institute Disciplinary Committee</div>
+        <div class="svc-item reveal"><b>Professor In-Charge,</b> Caste &amp; Discrimination Cell</div>
+        <div class="svc-item reveal"><b>Professor In-Charge,</b> Scholarship Cell</div>
+        <div class="svc-item reveal"><b>Member,</b> CSVTU Research &amp; Development Cell</div>
+        <div class="svc-item reveal"><b>Grant Lead,</b> NIDHI i-TBI (₹5 Cr) &amp; AIC (₹10 Cr) Innovation Centres</div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- SKILLS -->
-<div class="cw" id="skills">
-  <span class="eyebrow">// expertise</span>
-  <h2 class="section-title">Skills &amp; Techniques</h2>
-  <hr class="swatch">
-  <p class="section-lead">A toolkit built across wet lab, dry lab, innovation leadership, and the classroom.</p>
+<section class="section" id="skills">
+  <span class="kicker">Skills</span>
+  <h2 class="sec-title">Technical Skills</h2>
 
-  <div class="skills-grid">
-    <div class="sk reveal">
-      <div class="sk-head">
-        <div class="sk-icon si-p">💻</div>
-        <div class="sk-name">Programming &amp; Analysis</div>
-      </div>
-      <ul>
-        <li>MATLAB — modelling &amp; simulation</li>
-        <li>R / RStudio — statistical analysis</li>
-        <li>LaTeX — scientific typesetting</li>
-        <li>Image processing pipelines</li>
-        <li>Mathematical modelling</li>
-      </ul>
+  <div class="skill-grid">
+    <div>
+      <div class="skill-h">Languages</div>
+      <ul><li>MATLAB</li><li>LaTeX</li></ul>
     </div>
-    <div class="sk reveal d1">
-      <div class="sk-head">
-        <div class="sk-icon si-c">🔬</div>
-        <div class="sk-name">Experimental Biology</div>
-      </div>
-      <ul>
-        <li>ELISA assays</li>
-        <li>Bacterial gene knockouts</li>
-        <li>Evolutionary experiments</li>
-        <li>Animal handling (murine models)</li>
-        <li>Computational drug design (Schrödinger)</li>
-      </ul>
+    <div>
+      <div class="skill-h">Data Analysis</div>
+      <ul><li>RStudio</li><li>MATLAB</li><li>Image processing</li><li>Mathematical modelling</li></ul>
     </div>
-    <div class="sk reveal d2">
-      <div class="sk-head">
-        <div class="sk-icon si-a">🧬</div>
-        <div class="sk-name">Research Domains</div>
-      </div>
-      <ul>
-        <li>Microbial evolution &amp; adaptation</li>
-        <li>Fitness landscape theory</li>
-        <li>Gene regulatory networks</li>
-        <li>Systems &amp; synthetic biology</li>
-        <li>Precision oncology modelling</li>
-      </ul>
+    <div>
+      <div class="skill-h">Experimental Techniques</div>
+      <ul><li>ELISA</li><li>Animal handling (mice)</li><li>Bacterial gene knockouts</li><li>Evolutionary experiments</li></ul>
     </div>
-    <div class="sk reveal">
-      <div class="sk-head">
-        <div class="sk-icon si-c">🌐</div>
-        <div class="sk-name">Education &amp; Web</div>
-      </div>
-      <ul>
-        <li>SWAYAM MOOC design &amp; delivery</li>
-        <li>MATLAB training workshops</li>
-        <li>HTML / CSS development</li>
-        <li>Drug design workshop facilitation</li>
-        <li>Research methodology courses</li>
-      </ul>
-    </div>
-    <div class="sk reveal d1">
-      <div class="sk-head">
-        <div class="sk-icon si-p">🏛️</div>
-        <div class="sk-name">Leadership &amp; Admin</div>
-      </div>
-      <ul>
-        <li>IIC Presidency &amp; innovation strategy</li>
-        <li>Research &amp; institutional funding</li>
-        <li>International university liaison</li>
-        <li>Ethics committee membership</li>
-        <li>Grant acquisition (₹15 Cr+)</li>
-      </ul>
-    </div>
-    <div class="sk reveal d2">
-      <div class="sk-head">
-        <div class="sk-icon si-a">📚</div>
-        <div class="sk-name">Current Teaching</div>
-      </div>
-      <ul>
-        <li>Research Methodology (PhD scholars)</li>
-        <li>Computational Biology (B.Tech AI)</li>
-        <li>Bioinformatics (M.Tech)</li>
-        <li>Drug Delivery &amp; Design (M.Tech)</li>
-        <li>Data Visualisation (B.Tech)</li>
-      </ul>
+    <div>
+      <div class="skill-h">Web Development</div>
+      <ul><li>HTML</li><li>CSS</li></ul>
     </div>
   </div>
-</div>
+</section>
+
+<!-- AWARDS -->
+<section class="section alt" id="awards">
+  <div class="inner">
+    <span class="kicker">Awards &amp; Recognition</span>
+    <h2 class="sec-title">Honours</h2>
+
+    <div class="two-col">
+      <div>
+        <div class="col-h">Research</div>
+        <div class="li-item reveal"><span class="yr-tag">2018 ·</span> Best Poster Award, Annual Meeting of Biological Engineering Society India, IIT Bombay</div>
+      </div>
+      <div>
+        <div class="col-h">Engineering &amp; Robotics</div>
+        <div class="li-item reveal"><span class="yr-tag">2012 ·</span> 1st Position, "Aavartan" instrument design competition, NIT Raipur</div>
+        <div class="li-item reveal"><span class="yr-tag">2010 ·</span> Finalist, Robowars, IIT Bombay</div>
+        <div class="li-item reveal"><span class="yr-tag">2009 ·</span> 1st Position, autonomous robotics, NIT Raipur</div>
+        <div class="li-item reveal"><span class="yr-tag">2009 ·</span> 2nd Position, manual robotics, NIT Warangal</div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- CONTACT -->
-<div class="cw" id="contact">
-  <div id="contact-wrap">
-    <span class="eyebrow" style="display:block;text-align:center">// contact</span>
-    <h2 class="section-title">Get in Touch</h2>
-    <p class="section-lead" style="margin:0 auto">Open to research collaborations, invited talks, and academic partnerships.</p>
-    <div class="contact-card reveal">
-      <div class="contact-links">
-        <a href="mailto:brajeshrg@csvtu.ac.in" class="cl">
-          <span class="cl-icon">✉️</span>
-          <div class="cl-body">
-            <div class="cl-lbl">Email</div>
-            <div class="cl-val">brajeshrg@csvtu.ac.in</div>
-          </div>
-          <span class="cl-arr">→</span>
-        </a>
-        <a href="tel:+917880273521" class="cl">
-          <span class="cl-icon">📱</span>
-          <div class="cl-body">
-            <div class="cl-lbl">Phone</div>
-            <div class="cl-val">+91 7880 273 521</div>
-          </div>
-          <span class="cl-arr">→</span>
-        </a>
-        <div class="cl" style="cursor:default">
-          <span class="cl-icon">🏢</span>
-          <div class="cl-body">
-            <div class="cl-lbl">Department</div>
-            <div class="cl-val">Biomedical Engg &amp; Bioinformatics, CSVTU Bhilai, CG</div>
-          </div>
-        </div>
-      </div>
+<section class="section" id="contact">
+  <span class="kicker">Contact</span>
+  <h2 class="sec-title">Get in Touch</h2>
+  <p class="sec-lead">Open to research collaboration, invited talks, and academic partnerships.</p>
+
+  <div class="contact-panel reveal">
+    <a href="mailto:brajeshrg@csvtu.ac.in" class="c-row">
+      <span class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="1.5"/><path d="M3.5 6.5 12 13l8.5-6.5"/></svg></span>
+      <div class="c-body"><div class="c-lbl">Email</div><div class="c-val">brajeshrg@csvtu.ac.in</div></div>
+      <span class="c-arrow">→</span>
+    </a>
+    <a href="tel:+917880273521" class="c-row">
+      <span class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 4h3l2 5-2.5 1.5a11 11 0 0 0 5 5L14 13l5 2v3a2 2 0 0 1-2 2C9.5 20 4 14.5 4 7a2 2 0 0 1 1-3Z"/></svg></span>
+      <div class="c-body"><div class="c-lbl">Phone</div><div class="c-val">+91 7880 273 521</div></div>
+      <span class="c-arrow">→</span>
+    </a>
+    <div class="c-row">
+      <span class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="3" width="16" height="18"/><path d="M9 8h1M14 8h1M9 12h1M14 12h1M9 16h1M14 16h1"/></svg></span>
+      <div class="c-body"><div class="c-lbl">Department</div><div class="c-val">Biomedical Engineering &amp; Bioinformatics, CSVTU Bhilai, Chhattisgarh</div></div>
     </div>
   </div>
-</div>
+</section>
 
 <footer>
-  <div class="ft">© 2026 &nbsp;<span class="ft-grad">R. G. Brajesh, PhD</span>&nbsp; · CSVTU Bhilai, Chhattisgarh</div>
-  <div class="ft-mono">// Evolving. Always.</div>
+  <div>© 2026 R. G. Brajesh, PhD · CSVTU Bhilai, Chhattisgarh</div>
+  <div class="serif">Curriculum Vitae — last updated June 2026</div>
 </footer>
 
 <script>
-/* =====================================================
-   GENE REGULATORY NETWORK CANVAS ANIMATION
-   Nodes are coloured by "fitness value" on a gradient
-   from purple (low) → cyan (high), mirroring the
-   fitness landscape concept central to his research.
-===================================================== */
-const canvas = document.getElementById('canvas');
-const ctx = canvas.getContext('2d');
-let W, H, nodes;
-
-function lerp(a,b,t){ return Math.round(a+(b-a)*t) }
-function nodeColor(f,alpha){
-  // purple #8B7EFF → cyan #12D9CF
-  const r=lerp(139,18,f), g=lerp(126,217,f), b=lerp(255,207,f);
-  return `rgba(${r},${g},${b},${alpha})`;
-}
-function edgeColor(fi,fj,alpha){
-  return nodeColor((fi+fj)/2, alpha);
-}
-
-function resize(){
-  W = canvas.width  = window.innerWidth;
-  H = canvas.height = window.innerHeight;
-}
-
-function initNodes(){
-  nodes=[];
-  const n = Math.min(90, Math.floor(W*H/13000));
-  for(let i=0;i<n;i++){
-    nodes.push({
-      x: Math.random()*W,
-      y: Math.random()*H,
-      vx:(Math.random()-.5)*.38,
-      vy:(Math.random()-.5)*.38,
-      r: Math.random()*2.2+1.4,
-      fitness: Math.random(),
-      phase: Math.random()*Math.PI*2,
-      hub: Math.random()<.10
-    });
-  }
-}
-
-resize(); initNodes();
-window.addEventListener('resize',()=>{ resize(); initNodes(); });
-
-const MAX_DIST = 130;
-
-function draw(){
-  ctx.clearRect(0,0,W,H);
-
-  // edges
-  for(let i=0;i<nodes.length;i++){
-    for(let j=i+1;j<nodes.length;j++){
-      const dx=nodes[i].x-nodes[j].x, dy=nodes[i].y-nodes[j].y;
-      const d=Math.sqrt(dx*dx+dy*dy);
-      if(d<MAX_DIST){
-        const a=(1-d/MAX_DIST)*0.17;
-        ctx.beginPath();
-        ctx.moveTo(nodes[i].x,nodes[i].y);
-        ctx.lineTo(nodes[j].x,nodes[j].y);
-        ctx.strokeStyle=edgeColor(nodes[i].fitness,nodes[j].fitness,a);
-        ctx.lineWidth=.7;
-        ctx.stroke();
-      }
-    }
-  }
-
-  // nodes
-  for(const n of nodes){
-    n.phase+=.018;
-    const pulse = n.hub ? Math.sin(n.phase)*.7 : 0;
-
-    if(n.hub){
-      // glow halo
-      const g=ctx.createRadialGradient(n.x,n.y,0,n.x,n.y,16+pulse*3);
-      g.addColorStop(0, nodeColor(n.fitness,.13));
-      g.addColorStop(1, nodeColor(n.fitness,0));
-      ctx.beginPath();
-      ctx.arc(n.x,n.y,16+pulse*3,0,Math.PI*2);
-      ctx.fillStyle=g;
-      ctx.fill();
-    }
-
-    ctx.beginPath();
-    ctx.arc(n.x,n.y,n.r+(n.hub?pulse*.35:0),0,Math.PI*2);
-    ctx.fillStyle=nodeColor(n.fitness,.55);
-    ctx.fill();
-
-    // move
-    n.x+=n.vx; n.y+=n.vy;
-    if(n.x<-20) n.x=W+20; else if(n.x>W+20) n.x=-20;
-    if(n.y<-20) n.y=H+20; else if(n.y>H+20) n.y=-20;
-  }
-
-  requestAnimationFrame(draw);
-}
-requestAnimationFrame(draw);
-
-/* =====================================================
-   NAV — becomes opaque on scroll
-===================================================== */
+/* nav solid on scroll */
 window.addEventListener('scroll',()=>{
-  document.getElementById('nav').classList.toggle('solid', window.scrollY>60);
+  document.getElementById('nav').classList.toggle('solid', window.scrollY>40);
 });
 
-/* =====================================================
-   SCROLL REVEAL
-===================================================== */
+/* scroll reveal */
 const revEls = document.querySelectorAll('.reveal');
 const revObs = new IntersectionObserver(entries=>{
   entries.forEach(e=>{
@@ -845,17 +679,15 @@ const revObs = new IntersectionObserver(entries=>{
 },{threshold:.08,rootMargin:'0px 0px -30px 0px'});
 revEls.forEach(el=>revObs.observe(el));
 
-/* =====================================================
-   PUBLICATION FILTER
-===================================================== */
-document.querySelectorAll('.pf').forEach(btn=>{
+/* publication filter */
+document.querySelectorAll('.pt').forEach(btn=>{
   btn.addEventListener('click',()=>{
-    document.querySelectorAll('.pf').forEach(b=>b.classList.remove('on'));
+    document.querySelectorAll('.pt').forEach(b=>b.classList.remove('on'));
     btn.classList.add('on');
     const cat=btn.dataset.cat;
-    document.querySelectorAll('.pc').forEach(card=>{
+    document.querySelectorAll('.pub').forEach(card=>{
       const show = cat==='all' || card.dataset.cat===cat;
-      card.style.display = show ? 'flex' : 'none';
+      card.style.display = show ? 'grid' : 'none';
     });
   });
 });

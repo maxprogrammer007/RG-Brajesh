@@ -24,6 +24,7 @@
   --rule:#DBD4BB; --rule-2:#C5BB94;
   --green:#33503C; --green-d:#233628;
   --gold:#8C6A2E; --gold-d:#6E5320;
+  --rose:#A85B52; --rose-d:#7E4138;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -36,6 +37,10 @@ a{color:inherit;text-decoration:none}
 .serif{font-family:'Newsreader',serif}
 .sec-title{font-family:'Newsreader',serif;font-weight:600;font-size:clamp(28px,3.6vw,40px);color:var(--ink);letter-spacing:-.01em;margin:10px 0 0}
 .rule-short{border:none;height:1px;width:56px;background:var(--rule-2);margin:18px 0 0}
+
+/* ============ BIOTECH WATERMARK ============ */
+.bio-bg{position:fixed;inset:0;width:100vw;height:100vh;z-index:-1;pointer-events:none}
+.k-ico{width:15px;height:15px;display:inline-block;vertical-align:-2px;margin-right:7px;color:var(--green-d)}
 
 /* ============ NAV ============ */
 #nav{
@@ -54,6 +59,7 @@ a{color:inherit;text-decoration:none}
 /* ============ HERO ============ */
 #hero{position:relative;padding:172px 24px 96px;text-align:center;overflow:hidden}
 #contour{position:absolute;left:0;right:0;top:60px;width:100%;height:auto;pointer-events:none;z-index:0}
+.hero-medallion{position:absolute;top:-90px;right:-130px;width:560px;height:560px;pointer-events:none;z-index:0}
 .hero-inner{position:relative;z-index:1;max-width:760px;margin:0 auto}
 
 .hero-eyebrow{font:600 12px/1 'Inter';letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:22px}
@@ -154,6 +160,20 @@ a{color:inherit;text-decoration:none}
 .skill-grid li{font-size:13.5px;color:var(--ink-70);padding:6px 0;position:relative;padding-left:14px}
 .skill-grid li::before{content:'—';position:absolute;left:0;color:var(--rule-2)}
 
+/* ============ PEOPLE ============ */
+.people-sub{margin-top:46px}
+.edit-note{font-size:12.5px;color:var(--gold-d);font-style:italic;margin:-6px 0 18px}
+.people-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.p-card{border:1px solid var(--rule-2);background:var(--paper);padding:20px 18px;text-align:left;transition:border-color .2s}
+.p-card:hover{border-color:var(--green)}
+.p-card.placeholder{border-style:dashed;border-color:var(--rule-2);background:transparent}
+.p-avatar{width:38px;height:38px;border:1px solid var(--green-d);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Newsreader',serif;font-weight:600;font-size:13px;color:var(--green-d);margin-bottom:12px}
+.p-card.placeholder .p-avatar{border-style:dashed;border-color:var(--rule-2);color:var(--rule-2)}
+.p-name{font-family:'Newsreader',serif;font-weight:600;font-size:14.5px;color:var(--ink)}
+.p-card.placeholder .p-name{color:var(--muted)}
+.p-role{font-size:12px;color:var(--green-d);margin-top:4px}
+.p-org{font-size:11.5px;color:var(--muted);margin-top:3px}
+
 /* ============ CONTACT ============ */
 .contact-panel{margin-top:40px;border:1px solid var(--rule-2);background:var(--paper)}
 .c-row{display:flex;align-items:center;gap:18px;padding:20px 26px;border-bottom:1px solid var(--rule)}
@@ -176,10 +196,14 @@ footer .serif{font-style:italic;color:var(--ink-70)}
 .reveal.on{opacity:1;transform:translateY(0)}
 
 /* ============ RESPONSIVE ============ */
+@media(max-width:1200px){
+  .hero-medallion{width:400px;height:400px;top:-60px;right:-90px}
+}
 @media(max-width:880px){
   #nav{padding:16px 24px}
   .nav-links{display:none}
   #hero{padding:140px 20px 72px}
+  .hero-medallion{display:none}
   .section,.section.alt>.inner{padding:64px 22px}
   .about-cols{grid-template-columns:1fr;gap:34px}
   .hi-grid{grid-template-columns:1fr}
@@ -190,17 +214,57 @@ footer .serif{font-style:italic;color:var(--ink-70)}
   .svc-col:first-child{border-right:none;border-bottom:1px solid var(--rule)}
   .svc-col:first-child .svc-item,.svc-col:last-child .svc-item{padding-left:0;padding-right:0}
   .skill-grid{grid-template-columns:1fr 1fr;gap:28px}
+  .people-grid{grid-template-columns:1fr 1fr}
   .hero-facts{flex-wrap:wrap;row-gap:18px}
   footer{padding:22px;flex-direction:column;gap:8px;text-align:center}
 }
 @media(max-width:560px){
   .skill-grid{grid-template-columns:1fr}
+  .people-grid{grid-template-columns:1fr}
   .pub{grid-template-columns:24px 1fr;gap:12px}
   .hf{padding:0 16px}
 }
 </style>
 </head>
 <body>
+
+<!-- SHARED BIOTECH MOTIF DEFINITIONS (referenced by background watermark, hero illustration, section icons) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<defs>
+  <g id="m-rbc"><circle cx="0" cy="0" r="14" fill="none" stroke="currentColor" stroke-width="1.6"/><ellipse cx="0" cy="0" rx="6" ry="3.2" fill="none" stroke="currentColor" stroke-width="1.1"/></g>
+  <g id="m-sickle"><path d="M-10,-14 C-22,-6 -23,10 -12,18 C-1,24 11,19 15,8 C5,11 -7,5 -9,-7 C-11,-17 -2,-23 8,-22 C2,-24 -4,-22 -10,-14 Z" fill="none" stroke="currentColor" stroke-width="1.6"/></g>
+  <g id="m-rod"><rect x="-22" y="-7" width="44" height="14" rx="7" ry="7" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M22,0 q7,-4 12,1 M22,0 q7,4 11,7 M-22,0 q-7,-3 -11,-6" fill="none" stroke="currentColor" stroke-width="1"/></g>
+  <g id="m-helix"><path d="M-10,-40 C10,-26 -10,-13 10,0 C30,13 10,26 -10,40" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10,-40 C-10,-26 10,-13 -10,0 C-30,13 -10,26 10,40" fill="none" stroke="currentColor" stroke-width="1.6"/></g>
+  <g id="m-hex"><polygon points="0,-16 14,-8 14,8 0,16 -14,8 -14,-8" fill="none" stroke="currentColor" stroke-width="1.6"/></g>
+  <g id="m-net"><circle cx="-14" cy="-8" r="2.6" fill="currentColor"/><circle cx="10" cy="-14" r="2.6" fill="currentColor"/><circle cx="16" cy="6" r="2.6" fill="currentColor"/><circle cx="2" cy="16" r="2.6" fill="currentColor"/><circle cx="-16" cy="10" r="2.6" fill="currentColor"/><path d="M-14,-8 L10,-14 M10,-14 L16,6 M16,6 L2,16 M2,16 L-16,10 M-16,10 L-14,-8 M-14,-8 L2,16" stroke="currentColor" stroke-width="0.9" fill="none"/></g>
+  <g id="m-cancer"><path d="M0,-20 C12,-22 22,-12 20,0 C24,10 16,22 4,20 C-10,24 -22,14 -20,0 C-24,-10 -14,-22 0,-20 Z" fill="currentColor" fill-opacity="0.22" stroke="currentColor" stroke-width="1.4"/><ellipse cx="2" cy="-2" rx="9" ry="7" fill="currentColor" fill-opacity="0.5" stroke="none" transform="rotate(15)"/><circle cx="0" cy="-3" r="1.6" fill="currentColor" fill-opacity="0.85"/><circle cx="5" cy="1" r="1.2" fill="currentColor" fill-opacity="0.85"/></g>
+  <g id="m-cardio"><path d="M-26,0 C-20,-10 -10,-12 0,-6 C8,-2 14,-10 24,-8 C20,2 10,4 4,0 C-2,-4 -10,4 -18,6 C-24,8 -28,4 -26,0 Z" fill="currentColor" fill-opacity="0.2" stroke="currentColor" stroke-width="1.3"/></g>
+</defs>
+</svg>
+
+<!-- FIXED BACKGROUND WATERMARK — faint cells, sickle cells, bacteria, DNA, lattice, gene-network motifs tied to his research -->
+<svg class="bio-bg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <use href="#m-rbc"    transform="translate(120,150) scale(1.3)"        style="color:#20241D" opacity="0.07"/>
+  <use href="#m-sickle" transform="translate(300,620) scale(1.5) rotate(-12)" style="color:#33503C" opacity="0.08"/>
+  <use href="#m-rod"    transform="translate(1200,110) scale(1.1) rotate(8)"  style="color:#20241D" opacity="0.06"/>
+  <use href="#m-helix"  transform="translate(1360,500) scale(0.9)"       style="color:#33503C" opacity="0.07"/>
+  <use href="#m-hex"    transform="translate(70,800) scale(1.1)"         style="color:#8C6A2E" opacity="0.06"/>
+  <use href="#m-net"    transform="translate(740,70) scale(1.2)"         style="color:#20241D" opacity="0.06"/>
+  <use href="#m-rbc"    transform="translate(1320,790) scale(0.9)"       style="color:#33503C" opacity="0.06"/>
+  <use href="#m-sickle" transform="translate(1010,830) scale(1.0) rotate(22)" style="color:#20241D" opacity="0.05"/>
+  <use href="#m-rod"    transform="translate(360,290) scale(0.8) rotate(-6)"  style="color:#33503C" opacity="0.05"/>
+  <use href="#m-hex"    transform="translate(720,660) scale(0.8)"        style="color:#20241D" opacity="0.05"/>
+  <use href="#m-rbc"    transform="translate(580,850) scale(0.8)"        style="color:#8C6A2E" opacity="0.05"/>
+  <use href="#m-net"    transform="translate(1430,300) scale(0.7)"       style="color:#33503C" opacity="0.05"/>
+  <use href="#m-helix"  transform="translate(40,60) scale(0.8)"          style="color:#20241D" opacity="0.05"/>
+  <use href="#m-sickle" transform="translate(1220,580) scale(0.9) rotate(34)" style="color:#8C6A2E" opacity="0.05"/>
+  <use href="#m-hex"    transform="translate(900,860) scale(0.6)"        style="color:#33503C" opacity="0.045"/>
+  <use href="#m-rod"    transform="translate(60,480) scale(0.7) rotate(15)"   style="color:#8C6A2E" opacity="0.045"/>
+  <use href="#m-cancer" transform="translate(460,160) scale(1.4) rotate(-8)"  style="color:#A85B52" opacity="0.08"/>
+  <use href="#m-cancer" transform="translate(1100,650) scale(1.1) rotate(20)" style="color:#A85B52" opacity="0.06"/>
+  <use href="#m-cardio" transform="translate(220,40) scale(1.3) rotate(-10)"  style="color:#A85B52" opacity="0.06"/>
+  <use href="#m-cardio" transform="translate(960,420) scale(1.1) rotate(15)"  style="color:#33503C" opacity="0.05"/>
+</svg>
 
 <!-- NAV -->
 <nav id="nav">
@@ -210,6 +274,7 @@ footer .serif{font-style:italic;color:var(--ink-70)}
     <li><a href="#education">Education</a></li>
     <li><a href="#publications">Publications</a></li>
     <li><a href="#service">Service</a></li>
+    <li><a href="#people">People</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
@@ -222,6 +287,33 @@ footer .serif{font-style:italic;color:var(--ink-70)}
     <path d="M0,210 C250,170 420,250 650,200 S1000,140 1220,220 S1480,260 1600,200" fill="none" stroke="#8C6A2E" stroke-width="1" opacity="0.09"/>
     <path d="M0,270 C230,310 410,230 640,290 S980,340 1200,270 S1460,220 1600,300" fill="none" stroke="#33503C" stroke-width="1" opacity="0.07"/>
     <path d="M0,340 C240,300 430,370 660,330 S1010,280 1240,350 S1470,390 1600,330" fill="none" stroke="#8C6A2E" stroke-width="1" opacity="0.07"/>
+    <use href="#m-rbc" transform="translate(1480,80) scale(1.6)" style="color:#33503C" opacity="0.10"/>
+    <use href="#m-sickle" transform="translate(150,330) scale(1.8) rotate(-15)" style="color:#8C6A2E" opacity="0.09"/>
+  </svg>
+
+  <!-- ILLUSTRATED MICROSCOPE-VIEW MEDALLION — cancer cells, sickle cells, bacteria, cardiomyocytes, drawn from his own published work -->
+  <svg class="hero-medallion" viewBox="0 0 600 600" aria-hidden="true">
+    <defs>
+      <clipPath id="medClip"><circle cx="300" cy="300" r="280"/></clipPath>
+      <radialGradient id="medGrad" cx="46%" cy="40%" r="68%">
+        <stop offset="0%" stop-color="#EFE6DE" stop-opacity="0.9"/>
+        <stop offset="60%" stop-color="#EFE9D6" stop-opacity="0.45"/>
+        <stop offset="100%" stop-color="#F7F4EA" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+    <circle cx="300" cy="300" r="282" fill="none" stroke="#C5BB94" stroke-width="1.5"/>
+    <circle cx="300" cy="300" r="270" fill="none" stroke="#C5BB94" stroke-width="1"/>
+    <g clip-path="url(#medClip)">
+      <circle cx="300" cy="300" r="280" fill="url(#medGrad)"/>
+      <use href="#m-helix"  transform="translate(470,470) scale(1.4) rotate(10)" style="color:#33503C" opacity="0.16"/>
+      <use href="#m-rod"    transform="translate(150,470) scale(1.6) rotate(-12)" style="color:#33503C" opacity="0.5"/>
+      <use href="#m-rbc"    transform="translate(440,200) scale(1.7)"            style="color:#8C6A2E" opacity="0.55"/>
+      <use href="#m-rbc"    transform="translate(150,160) scale(1.2)"            style="color:#8C6A2E" opacity="0.4"/>
+      <use href="#m-sickle" transform="translate(130,330) scale(1.9) rotate(-18)" style="color:#7E4138" opacity="0.55"/>
+      <use href="#m-cardio" transform="translate(370,470) scale(1.5) rotate(8)"  style="color:#33503C" opacity="0.45"/>
+      <use href="#m-cancer" transform="translate(310,250) scale(3.1)"            style="color:#A85B52" opacity="0.95"/>
+      <use href="#m-cancer" transform="translate(440,360) scale(1.7) rotate(24)" style="color:#A85B52" opacity="0.8"/>
+    </g>
   </svg>
 
   <div class="hero-inner">
@@ -257,7 +349,7 @@ footer .serif{font-style:italic;color:var(--ink-70)}
 
 <!-- ABOUT -->
 <section class="section" id="about">
-  <span class="kicker">About</span>
+  <span class="kicker"><svg class="k-ico" viewBox="-20 -20 40 40"><use href="#m-rbc"/></svg>About</span>
   <h2 class="sec-title">Research Focus &amp; Background</h2>
   <hr class="rule-short">
 
@@ -281,7 +373,7 @@ footer .serif{font-style:italic;color:var(--ink-70)}
 <!-- EDUCATION -->
 <section class="section alt" id="education">
   <div class="inner">
-    <span class="kicker">Education &amp; Career</span>
+    <span class="kicker"><svg class="k-ico" viewBox="-40 -45 80 90"><use href="#m-helix"/></svg>Education &amp; Career</span>
     <h2 class="sec-title">Academic &amp; Research Appointments</h2>
     <p class="sec-lead">A research path from biotechnology fundamentals through doctoral and postdoctoral work to a faculty appointment in computational biology.</p>
 
@@ -341,7 +433,7 @@ footer .serif{font-style:italic;color:var(--ink-70)}
 
 <!-- PUBLICATIONS -->
 <section class="section" id="publications">
-  <span class="kicker">Publications</span>
+  <span class="kicker"><svg class="k-ico" viewBox="-20 -20 40 40"><use href="#m-net"/></svg>Publications</span>
   <h2 class="sec-title">Peer-Reviewed Works</h2>
   <p class="sec-lead">14 publications spanning microbial evolution, precision oncology, systems biology, and computational imaging (2015 – 2026).</p>
 
@@ -563,7 +655,7 @@ footer .serif{font-style:italic;color:var(--ink-70)}
 <!-- SERVICE -->
 <section class="section alt" id="service">
   <div class="inner">
-    <span class="kicker">Service &amp; Leadership</span>
+    <span class="kicker"><svg class="k-ico" viewBox="-25 -12 50 24"><use href="#m-rod"/></svg>Service &amp; Leadership</span>
     <h2 class="sec-title">Academic Service at CSVTU Bhilai</h2>
     <p class="sec-lead">Administrative and institutional roles held alongside teaching and research.</p>
 
@@ -590,7 +682,7 @@ footer .serif{font-style:italic;color:var(--ink-70)}
 
 <!-- SKILLS -->
 <section class="section" id="skills">
-  <span class="kicker">Skills</span>
+  <span class="kicker"><svg class="k-ico" viewBox="-18 -20 36 40"><use href="#m-hex"/></svg>Skills</span>
   <h2 class="sec-title">Technical Skills</h2>
 
   <div class="skill-grid">
@@ -633,6 +725,101 @@ footer .serif{font-style:italic;color:var(--ink-70)}
       </div>
     </div>
   </div>
+</section>
+
+<!-- PEOPLE -->
+<section class="section" id="people">
+    <span class="kicker"><svg class="k-ico" viewBox="-20 -20 40 40"><use href="#m-net"/></svg>People</span>
+    <h2 class="sec-title">Mentors, Collaborators &amp; Research Group</h2>
+    <p class="sec-lead">The people behind the research — advisors, frequent co-authors, and the current group at CSVTU.</p>
+
+    <div class="people-sub">
+      <div class="col-h">Mentors &amp; Advisors</div>
+      <div class="people-grid">
+        <div class="p-card reveal">
+          <div class="p-avatar">SS</div>
+          <div class="p-name">Prof. Supreet Saini</div>
+          <div class="p-role">PhD Advisor</div>
+          <div class="p-org">IIT Bombay, Chemical Engineering</div>
+        </div>
+        <div class="p-card reveal">
+          <div class="p-avatar">JD</div>
+          <div class="p-name">Prof. Jeremy Draghi</div>
+          <div class="p-role">Postdoctoral Advisor</div>
+          <div class="p-org">Virginia Tech, Biological Sciences</div>
+        </div>
+        <div class="p-card reveal">
+          <div class="p-avatar">SR</div>
+          <div class="p-name">Prof. S. Ramalingam</div>
+          <div class="p-role">M.Tech Advisor</div>
+          <div class="p-org">Anna University, Chennai</div>
+        </div>
+        <div class="p-card reveal">
+          <div class="p-avatar">TY</div>
+          <div class="p-name">Prof. Tushar Yadav</div>
+          <div class="p-role">B.Tech Advisor</div>
+          <div class="p-org">NIT Raipur</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="people-sub">
+      <div class="col-h">Frequent Collaborators</div>
+      <div class="people-grid">
+        <div class="p-card reveal">
+          <div class="p-avatar">TP</div>
+          <div class="p-name">Tarun Pant</div>
+          <div class="p-role">Co-author · 4 publications</div>
+          <div class="p-org">Medical College of Wisconsin</div>
+        </div>
+        <div class="p-card reveal">
+          <div class="p-avatar">BD</div>
+          <div class="p-name">Prof. Brian Day</div>
+          <div class="p-role">Co-author · 3 publications</div>
+          <div class="p-org">Medical College of Wisconsin</div>
+        </div>
+        <div class="p-card reveal">
+          <div class="p-avatar">PV</div>
+          <div class="p-name">Pratiksha Venkataraman</div>
+          <div class="p-role">Co-author · 3 publications</div>
+          <div class="p-org">IIT Bombay</div>
+        </div>
+        <div class="p-card reveal">
+          <div class="p-avatar">NA</div>
+          <div class="p-name">Nidhi Ahlawat</div>
+          <div class="p-role">Co-author · 3 publications</div>
+          <div class="p-org">IIT Bombay</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="people-sub">
+      <div class="col-h">Research Group — CSVTU Bhilai</div>
+      <p class="edit-note">✎ Add current students and research staff here — copy a card below and replace the sample text with real details.</p>
+      <div class="people-grid">
+        <!-- ADD A NEW PERSON: duplicate this card block and edit the four lines inside -->
+        <div class="p-card placeholder reveal">
+          <div class="p-avatar">??</div>
+          <div class="p-name">Add Name</div>
+          <div class="p-role">Role — e.g. PhD Scholar</div>
+          <div class="p-org">Research area</div>
+        </div>
+        <div class="p-card placeholder reveal">
+          <div class="p-avatar">??</div>
+          <div class="p-name">Add Name</div>
+          <div class="p-role">Role — e.g. M.Tech Student</div>
+          <div class="p-org">Research area</div>
+        </div>
+        <div class="p-card placeholder reveal">
+          <div class="p-avatar">??</div>
+          <div class="p-name">Add Name</div>
+          <div class="p-role">Role — e.g. Project Associate</div>
+          <div class="p-org">Research area</div>
+        </div>
+        <!-- END SAMPLE CARDS -->
+      </div>
+    </div>
+
 </section>
 
 <!-- CONTACT -->
